@@ -55,3 +55,4 @@ const SingleProduct = ({prod}) => {
 }
 
 export default SingleProduct
+
