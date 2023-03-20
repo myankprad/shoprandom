@@ -1,8 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { ListGroup, Row, Col } from 'react-bootstrap'
+import { Button } from 'bootstrap'
+import { CartState } from '../context/context'
+import { useEffect } from 'react'
 
 const Cart = () => {
+  const {
+    state: {cart}, dispatch,
+  } = CartState()
+
+ const [ total, setTotal ] = useState()
+ useEffect(()=>{
+  setTotal(cart.reduce((acc, curr)=> acc + Number(curr.price)*curr.qty , 0))
+ }, [cart])
+
   return (
-    <div>Network</div>
+    <div className='home'>
+     <div className='productContainer'>
+      <ListGroup>
+        {
+          cart.map((prod)=>{
+           <Row>
+            <Col md={2}>
+              <span>{prod.productname}</span>
+            </Col>
+            <Col md={2}>₹ {prod.price}</Col>
+                <Col md={2}>
+                  <Rating rating={prod.ratings} />
+                </Col>
+           </Row>
+          })
+        }
+      </ListGroup>
+     </div>
+     <div className='filters summary'>
+     <span className="title">Subtotal ({cart.length}) items</span>
+        <span style={{ fontWeight: 700, fontSize: 20 }}>Total: ₹ {total}</span>
+        <Button type="button" disabled={cart.length === 0}>
+          Proceed to Checkout
+        </Button>
+     </div>
+    </div>
   )
 }
 

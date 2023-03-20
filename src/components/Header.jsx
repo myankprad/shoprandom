@@ -58,10 +58,10 @@ const Header = () => {
                       <img
                         src={prod.image}
                         className="cartItemImg"
-                        alt={prod.name}
+                        alt={prod.productname}
                       />
                       <div className="cartItemDetail">
-                        <span>{prod.name}</span>
+                        <span>{prod.productname}</span>
                         <span>₹ {prod.price.split(".")[0]}</span>
                       </div>
                       <AiFillDelete
